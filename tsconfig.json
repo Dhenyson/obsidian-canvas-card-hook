@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": false,
+    "strict": true,
     "noEmit": true,
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "types": ["node", "obsidian"]
   },
-  "include": ["src/**/*.js"]
+  "include": ["src/**/*.ts"]
 }

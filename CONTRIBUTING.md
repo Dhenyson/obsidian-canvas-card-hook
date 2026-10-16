@@ -8,15 +8,19 @@ Use Node.js 24 and pnpm. Install development dependencies with `pnpm install --f
 
 ```sh
 pnpm lint
+pnpm typecheck
 pnpm test
 pnpm build
 ```
 
-The production build is deterministic and creates `main.js` in the repository root and the three runtime files in `dist/canvas-card-hook/`. Build dependencies are not bundled into the plugin.
+Source files in `src/` use strict TypeScript and explicit Canvas interfaces. Do not introduce unchecked `any` types or suppress review rules. The complete recommended Obsidian ESLint configuration runs with zero warnings allowed, alongside `tsc --noEmit` in CI and releases.
+
+The production build uses the pinned TypeScript compiler and deterministically inlines the two internal modules into a CommonJS plugin. It creates `main.js` in the repository root, the three runtime files in `dist/canvas-card-hook/`, and `dist/core.cjs` for unit tests and playground setup. Build dependencies are not bundled into the plugin. `pnpm test` builds before testing the emitted core module.
 
 Use a separate test vault with the built-in Canvas plugin enabled. Create it with:
 
 ```sh
+pnpm build
 node scripts/setup-dev.cjs "/absolute/path/to/Canvas Card Hook Dev"
 node scripts/build.cjs "/absolute/path/to/Canvas Card Hook Dev"
 ```

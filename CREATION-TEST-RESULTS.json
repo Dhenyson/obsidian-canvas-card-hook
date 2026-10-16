@@ -1,5 +1,5 @@
 {
-  "passed": 31,
+  "passed": 34,
   "checks": [
     "Compact jump button uses a 28px circle and a 16px icon",
     "Hook background matches a native card: theme-dark, default",
@@ -19,6 +19,9 @@
     "Hook background matches a native card: theme-light, 6",
     "Hook background matches a native card: theme-light, #b57bd8",
     "Editing retains the native colored background",
+    "Hook stays visible without native content overlap at zoom -2, without CSS important overrides",
+    "Hook stays visible without native content overlap at zoom 0, without CSS important overrides",
+    "Hook stays visible without native content overlap at zoom 1, without CSS important overrides",
     "Exactly one hook control is added to the native toolbar",
     "Creation menu preserves the native card, note, and media actions",
     "Blank-canvas creation menu contains Add hook exactly once",
@@ -33,5 +36,5 @@
     "Unloading restores the original native creation menu",
     "Reloading restores exactly one hook toolbar control"
   ],
-  "date": "2026-10-16T19:02:36.011Z"
+  "date": "2026-10-16T19:44:58.208Z"
 }

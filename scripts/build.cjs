@@ -1,11 +1,20 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
-const core = fs.readFileSync(path.join(root, 'src/core.js'), 'utf8');
-const main = fs.readFileSync(path.join(root, 'src/main.js'), 'utf8');
-const bundle = main.replace('require("./core")', () => `(() => { const module = { exports: {} };\n${core}\nreturn module.exports; })()`);
+const ts = require('typescript');
+const compile = name => ts.transpileModule(fs.readFileSync(path.join(root, `src/${name}.ts`), 'utf8'), {
+  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, newLine: ts.NewLineKind.LineFeed }
+}).outputText;
+const core = compile('core');
+const canvas = compile('canvas');
+const main = compile('main');
+const inline = code => `(() => { const exports = {};\n${code}\nreturn exports; })()`;
+const bundle = 'module.exports = (() => {\nconst exports = {};\n' + main
+  .replace('require("./core")', () => inline(core))
+  .replace('require("./canvas")', () => inline(canvas)) + '\nreturn exports.default;\n})();\n';
 const out = path.join(root, 'dist/canvas-card-hook');
 fs.mkdirSync(out, { recursive: true });
+fs.writeFileSync(path.join(root, 'dist/core.cjs'), core);
 fs.writeFileSync(path.join(out, 'main.js'), bundle);
 fs.writeFileSync(path.join(root, 'main.js'), bundle);
 for (const name of ['manifest.json', 'styles.css']) fs.copyFileSync(path.join(root, name), path.join(out, name));

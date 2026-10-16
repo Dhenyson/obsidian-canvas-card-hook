@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { makeLink, writeHook } = require('../src/core');
+const { makeLink, writeHook } = require('../dist/core.cjs');
 const vault = path.resolve(process.argv[2]);
 const config = path.join(vault, '.obsidian');
 fs.mkdirSync(config, { recursive: true });

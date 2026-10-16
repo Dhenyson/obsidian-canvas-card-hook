@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { makeLink, parseTarget, readHook, writeHook, clipboardLink, MIME } = require('../src/core');
+const { makeLink, parseTarget, readHook, writeHook, clipboardLink, MIME, copiedCardId, parseCanvasDocument } = require('../dist/core.cjs');
 const context = { vault: 'Test vault', canvas: 'Folder/Canvas & ideas.canvas' };
 const id = '0123456789abcdef';
 
@@ -34,4 +34,23 @@ test('paste prefers the source reference and never consumes or rewrites the nati
   assert.equal(entries['obsidian/canvas'], native);
   entries['obsidian/canvas'] = JSON.stringify({ nodes: [{ id }, { id: 'fedcba9876543210' }] });
   assert.equal(clipboardLink(data, context), '');
+});
+
+test('reject malformed clipboard payloads without creating a target or throwing', () => {
+  for (const value of [null, 2, {}, { nodes: [null] }, { nodes: [{ id: 2 }] }, { nodes: [{ id: '../bad' }] }, { nodes: [{ id }, { id }] }])
+    assert.equal(copiedCardId(JSON.stringify(value)), null);
+  assert.equal(copiedCardId('{'), null);
+  assert.equal(copiedCardId(JSON.stringify({ nodes: [{ id }] })), id);
+});
+
+test('validate hook metadata before reading its fields', () => {
+  for (const value of [null, [], 42, { title: {}, target: '' }, { title: '', target: [] }])
+    assert.equal(readHook('<!-- canvas-card-hook:v1\n' + JSON.stringify(value) + '\n-->'), null);
+});
+
+test('validate Canvas nodes while preserving fields owned by Obsidian and other plugins', () => {
+  const original = { nodes: [{ id, type: 'text', text: 'hello', x: 5, custom: { retained: true } }], edges: [], custom: ['keep'] };
+  assert.deepEqual(parseCanvasDocument(JSON.stringify(original)), original);
+  for (const value of [null, {}, { nodes: [null] }, { nodes: [{ id, type: 'text', text: 4 }] }])
+    assert.throws(() => parseCanvasDocument(JSON.stringify(value)));
 });

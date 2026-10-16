@@ -61,11 +61,21 @@ const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
       const editingBackground = { native: getComputedStyle(native.contentEl).backgroundColor, hook: getComputedStyle(root).backgroundColor };
       native.setColor('4'); native.render(); editingBackground.native = getComputedStyle(native.contentEl).backgroundColor;
       plugin.finishEdit(record);
-      return { buttonSize, backgrounds, editingBackground, toolbar: c.cardMenuEl.querySelectorAll('.cch-add-hook').length };
+      const visibility = [];
+      for (const zoom of [-2, 0, 1]) {
+        c.setState({ x: hook.x + 160, y: hook.y + 30, zoom });
+        hook.attach(); hook.render();
+        await new Promise(resolve => setTimeout(resolve, 60));
+        const nativeLayers = [...hook.containerEl.querySelectorAll('.canvas-node-content:not(.cch-root), .canvas-node-content-blocker, .canvas-node-placeholder')];
+        visibility.push({ zoom, rootVisible: getComputedStyle(root).display !== 'none', nativeHidden: nativeLayers.every(el => getComputedStyle(el).display === 'none') });
+      }
+      c.setState({ x: 360, y: 100, zoom: 0 });
+      return { buttonSize, backgrounds, editingBackground, visibility, toolbar: c.cardMenuEl.querySelectorAll('.cch-add-hook').length };
     });
     check(appearance.buttonSize.width === '28px' && appearance.buttonSize.height === '28px' && appearance.buttonSize.icon === '16px', 'Compact jump button uses a 28px circle and a 16px icon');
     for (const row of appearance.backgrounds) check(!!row.native && row.native === row.hook, `Hook background matches a native card: ${row.theme}, ${row.color || 'default'}`);
     check(appearance.editingBackground.native === appearance.editingBackground.hook, 'Editing retains the native colored background');
+    for (const row of appearance.visibility) check(row.rootVisible && row.nativeHidden, `Hook stays visible without native content overlap at zoom ${row.zoom}, without CSS important overrides`);
     check(appearance.toolbar === 1, 'Exactly one hook control is added to the native toolbar');
 
     // Inspect and invoke the real native menu items with a minimal menu collector.

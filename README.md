@@ -104,10 +104,11 @@ Canvas rendering and viewport methods use internal Obsidian interfaces. Future O
 
 ## Development and support
 
-The project is written in JavaScript with a deterministic, dependency-free runtime build. Development linting uses the official Obsidian ESLint rules. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and testing.
+The project uses strict TypeScript with a deterministic CommonJS runtime build and no bundled runtime dependencies. Development and CI run the complete recommended Obsidian lint configuration, including type-aware rules, and fail on warnings. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and testing.
 
 ```sh
 pnpm install --frozen-lockfile
+pnpm typecheck
 pnpm lint
 pnpm test
 pnpm build
@@ -115,7 +116,9 @@ pnpm build
 
 The build produces `main.js` in the repository root and installable runtime files in `dist/canvas-card-hook/`. A Git tag matching the manifest version publishes the three installation assets through GitHub Actions after validation.
 
-The local test suite contains four unit tests and 73 integration checks in the real Obsidian app. See [TEST-RESULTS.json](TEST-RESULTS.json) and [CREATION-TEST-RESULTS.json](CREATION-TEST-RESULTS.json) for the tested behaviors. The creation checks cover native color matching in light and dark themes, the compact button, menu placement, toolbar clicks, keyboard activation, actual pointer dragging, read-only behavior, and unload/reload cleanup. These checks are evidence of the tested release, not a promise that all themes or Canvas plugins are compatible.
+The local test suite contains seven unit tests and 76 integration checks in the real Obsidian app. See [TEST-RESULTS.json](TEST-RESULTS.json) and [CREATION-TEST-RESULTS.json](CREATION-TEST-RESULTS.json) for the tested behaviors. The creation checks cover native color matching in light and dark themes, the compact button, menu placement, toolbar clicks, keyboard activation, actual pointer dragging, read-only behavior, and unload/reload cleanup. They also verify visibility at several zoom levels without CSS important overrides. These checks are evidence of the tested release, not a promise that all themes or Canvas plugins are compatible.
+
+Release workflows generate GitHub build-provenance attestations for all three installation files before publishing. See [Security and review notes](docs/SECURITY-REVIEW.md) for the remaining clipboard and vault access disclosures.
 
 Report reproducible problems in [GitHub Issues](https://github.com/Dhenyson/obsidian-canvas-card-hook/issues). See the [changelog](CHANGELOG.md) for release history.
 

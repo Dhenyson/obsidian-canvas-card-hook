@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.1
+
+- Replace untyped runtime source with strict TypeScript and explicit Canvas interfaces, retaining the existing plugin ID, hook metadata format, UI, and navigation behavior.
+- Enable the full recommended Obsidian ESLint configuration and TypeScript checking in development, CI, and release workflows; fail linting on warnings.
+- Validate hook metadata, native copied-card references, and Canvas JSON before consuming their fields.
+- Preserve native wrapper receivers and arguments without aliasing `this`.
+- Replace the CSS important override with specific selectors; verify low, normal, and high zoom.
+- Generate GitHub build-provenance attestations for all installation files before publishing.
+- Keep clipboard and vault enumeration capabilities explicitly documented because they support copying references and updating destinations after renames.
+- Validate seven unit tests and 76 real-app integration checks.
+
 ## 0.2.0
 
 - Add **Add hook** to the native creation menu when right-clicking empty Canvas space.
