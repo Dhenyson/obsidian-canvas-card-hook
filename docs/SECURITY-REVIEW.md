@@ -4,6 +4,8 @@ Version 0.2.0 received 601 code/CSS warnings and four other findings. Of the cod
 
 ## Changes completed in 0.2.2
 
+The official community scan completed on October 16, 2026 for version 0.2.2 (commit `f18868c`). The public scorecard reports **Review: Passed**, seven passed checks, no code/CSS warnings, and two informational capability findings instead of the previous 605 findings. Both release-asset attestation checks and the byte-for-byte reproducible build check passed. The remaining findings are vault enumeration and clipboard access, explained below. The separate disclosure that a malware scan is unavailable still applies.
+
 - Strict TypeScript source, typed public API imports, and explicit interfaces for the undocumented Canvas boundary.
 - Runtime validation of parsed JSON before accessing hook, copied-card, or Canvas node fields.
 - The complete recommended Obsidian lint configuration, with no warning suppression and zero warnings allowed.
