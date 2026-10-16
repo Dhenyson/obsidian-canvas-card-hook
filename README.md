@@ -4,7 +4,7 @@
 
 Canvas Card Hook adds small, clickable navigation cards to Obsidian Canvas. Link to a destination in the same Canvas or another Canvas in your vault. Click the arrow and Obsidian uses its native **Zoom to selection** to focus the destination.
 
-![Canvas Card Hook: card links and jump shortcuts](docs/images/overview.jpg)
+![Canvas Card Hook: card links and jump shortcuts](docs/images/workspace-overview.jpg)
 
 Watch a hook jump to a distant card in the same Canvas, then open a specific card in another Canvas in the same vault. The animated pointer and click highlights make each action visible.
 
@@ -62,7 +62,7 @@ Resize a hook to suit your layout. Its arrow stays centered even on short cards.
 
 While editing, the card temporarily becomes **380 × 260**, the same size as a new hook. Done, Enter, Escape, or clicking outside restores its exact previous width and height. Saves, clipboard data, and history retain the chosen preview dimensions while the editor is expanded.
 
-![Inline hook editor](docs/images/editor.jpg)
+![Inline hook editor](docs/images/hook-editor.jpg)
 
 ## Copy and paste behavior
 
