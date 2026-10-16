@@ -6,6 +6,12 @@ Canvas Card Hook adds small, clickable navigation cards to Obsidian Canvas. Link
 
 ![Canvas Card Hook: card links and jump shortcuts](docs/images/overview.jpg)
 
+Watch a hook jump to a distant card in the same Canvas, then open a specific card in another Canvas in the same vault. The animated pointer and click highlights make each action visible.
+
+![Animated demonstration: click a hook to jump within a Canvas or between canvases in the same vault](docs/images/demo.gif)
+
+The screenshots and animation use a fictional example workspace with groups, connections, and three hook shortcuts.
+
 ## Features
 
 - **Add hook** in the native card context menu.
@@ -47,6 +53,8 @@ Double-click the hook body or use the native **Edit** action to change its title
 Copy the destination card link from **Canvas B**, then paste it into a hook in **Canvas A**. Both canvases must belong to the same vault. Clicking the hook opens or reveals Canvas B, selects the correct card, and applies native zoom to selection. An already-open destination Canvas is reused.
 
 For cross-canvas links, use **Copy card link** or **Ctrl+C**, rather than a bare card ID. A raw 16-character card ID is resolved only within the hook's own Canvas. Cross-vault navigation is not supported.
+
+![Design workspace in another Canvas in the same vault](docs/images/another-canvas.jpg)
 
 ## Compact cards and comfortable editing
 
