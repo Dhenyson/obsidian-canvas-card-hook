@@ -1,8 +1,8 @@
 # Security and automated review
 
-Version 0.2.0 received 601 code/CSS warnings and four other findings. Of the code warnings, 596 concerned values the analyzer could not type-check. Reproducing the scanner rules locally confirmed the exact JavaScript counts. The previous local configuration omitted these type-aware rules; version 0.2.1 corrects that validation gap.
+Version 0.2.0 received 601 code/CSS warnings and four other findings. Of the code warnings, 596 concerned values the analyzer could not type-check. Reproducing the scanner rules locally confirmed the exact JavaScript counts. The previous local configuration omitted these type-aware rules; versions 0.2.1 and 0.2.2 correct that validation gap and complete the stylesheet cleanup.
 
-## Changes in 0.2.1
+## Changes completed in 0.2.2
 
 - Strict TypeScript source, typed public API imports, and explicit interfaces for the undocumented Canvas boundary.
 - Runtime validation of parsed JSON before accessing hook, copied-card, or Canvas node fields.

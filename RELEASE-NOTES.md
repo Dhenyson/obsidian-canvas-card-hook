@@ -1,4 +1,4 @@
-Canvas Card Hook 0.2.1 improves code validation and release provenance while preserving the existing interface and hooks.
+Canvas Card Hook 0.2.2 completes the code validation, CSS, and release-provenance cleanup while preserving the existing interface and hooks.
 
 - Strict TypeScript, typed Canvas interfaces, and the complete recommended Obsidian lint configuration with zero warnings allowed.
 - Validated hook metadata, copied-card payloads, and Canvas JSON before accessing their fields.

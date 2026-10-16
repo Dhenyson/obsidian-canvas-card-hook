@@ -1,6 +1,6 @@
-.cch-node .canvas-node-content:not(.cch-root),
-.cch-node .canvas-node-content-blocker,
-.cch-node .canvas-node-placeholder { display: none !important; }
+.canvas-node.cch-node .canvas-node-content:not(.cch-root),
+.canvas-node.cch-node .canvas-node-content-blocker,
+.canvas-node.cch-node .canvas-node-placeholder { display: none; }
 .cch-root {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between;
   gap: 12px; padding: 0 16px; min-height: 0; box-sizing: border-box; overflow: hidden; color: var(--text-normal);

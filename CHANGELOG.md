@@ -1,12 +1,17 @@
 # Changelog
 
+## 0.2.2
+
+- Include the tested CSS selector correction omitted from the 0.2.1 package. No visual or functional changes are intended.
+- Complete the review cleanup with no important declarations in the shipped stylesheet.
+
 ## 0.2.1
 
 - Replace untyped runtime source with strict TypeScript and explicit Canvas interfaces, retaining the existing plugin ID, hook metadata format, UI, and navigation behavior.
 - Enable the full recommended Obsidian ESLint configuration and TypeScript checking in development, CI, and release workflows; fail linting on warnings.
 - Validate hook metadata, native copied-card references, and Canvas JSON before consuming their fields.
 - Preserve native wrapper receivers and arguments without aliasing `this`.
-- Replace the CSS important override with specific selectors; verify low, normal, and high zoom.
+- Verify specific CSS selectors at low, normal, and high zoom; the stylesheet correction ships in 0.2.2.
 - Generate GitHub build-provenance attestations for all installation files before publishing.
 - Keep clipboard and vault enumeration capabilities explicitly documented because they support copying references and updating destinations after renames.
 - Validate seven unit tests and 76 real-app integration checks.
