@@ -15,12 +15,14 @@ The screenshots and animation use a fictional example workspace with groups, con
 ## Features
 
 - **Add hook** in the native card context menu.
+- **Add hook** when right-clicking empty Canvas space.
+- A hook icon in the bottom Canvas toolbar: click to create a hook at the center, or drag it onto the Canvas.
 - **Copy card link** for any destination card.
 - Two inline fields: **Title** and **Card link or ID**.
 - Click the arrow to jump; click the body to select or move the hook.
 - Links within a Canvas and between canvases in the same vault.
 - Native card movement, resizing, colors, connections, duplication, undo, and redo.
-- A centered arrow on compact cards.
+- A compact, centered arrow button and the same color background as native cards.
 - A comfortable temporary editor size that restores your chosen card size afterward.
 - Offline storage inside standard `.canvas` files, with a readable Markdown fallback.
 
@@ -46,6 +48,8 @@ For manual installation, download `main.js`, `manifest.json`, and `styles.css` f
 
 The card on which you choose **Add hook** is only the placement anchor. It is not replaced, and it does not determine the destination.
 
+You can also right-click **empty Canvas space → Add hook** to create a hook at that position. In the bottom toolbar, next to the native card, note, and media controls, click **Drag to add hook** to create a hook at the center of the visible Canvas, or drag the icon to place it precisely. Dragging uses native Canvas snapping. The toolbar icon also supports **Enter** and **Space** when focused. Creation is unavailable on read-only canvases.
+
 Double-click the hook body or use the native **Edit** action to change its title or destination. Changes save as you type. Escape finishes editing; it does not discard changes.
 
 ## Jump between canvases
@@ -59,6 +63,8 @@ For cross-canvas links, use **Copy card link** or **Ctrl+C**, rather than a bare
 ## Compact cards and comfortable editing
 
 Resize a hook to suit your layout. Its arrow stays centered even on short cards.
+
+Hooks use the native Canvas content background, so standard and custom card colors apply just as they do to regular cards, including while editing. The jump button is a compact 28-pixel circle with a 16-pixel arrow.
 
 While editing, the card temporarily becomes **380 × 260**, the same size as a new hook. Done, Enter, Escape, or clicking outside restores its exact previous width and height. Saves, clipboard data, and history retain the chosen preview dimensions while the editor is expanded.
 
@@ -109,7 +115,7 @@ pnpm build
 
 The build produces `main.js` in the repository root and installable runtime files in `dist/canvas-card-hook/`. A Git tag matching the manifest version publishes the three installation assets through GitHub Actions after validation.
 
-The local test suite contains four unit tests and 42 integration checks in the real Obsidian app. See [TEST-RESULTS.json](TEST-RESULTS.json) for the tested behaviors and application version. These checks are evidence of the tested release, not a promise that all themes or Canvas plugins are compatible.
+The local test suite contains four unit tests and 73 integration checks in the real Obsidian app. See [TEST-RESULTS.json](TEST-RESULTS.json) and [CREATION-TEST-RESULTS.json](CREATION-TEST-RESULTS.json) for the tested behaviors. The creation checks cover native color matching in light and dark themes, the compact button, menu placement, toolbar clicks, keyboard activation, actual pointer dragging, read-only behavior, and unload/reload cleanup. These checks are evidence of the tested release, not a promise that all themes or Canvas plugins are compatible.
 
 Report reproducible problems in [GitHub Issues](https://github.com/Dhenyson/obsidian-canvas-card-hook/issues). See the [changelog](CHANGELOG.md) for release history.
 

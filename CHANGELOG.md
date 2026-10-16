@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0
+
+- Add **Add hook** to the native creation menu when right-clicking empty Canvas space.
+- Add a hook control to the bottom Canvas toolbar: click to create at the viewport center, or drag to place a hook with native snapping.
+- Support Enter and Space when the new toolbar control has keyboard focus.
+- Reduce the jump button from 48 to 28 pixels, with a 16-pixel arrow and less horizontal padding.
+- Reuse the native Canvas content background so default colors, custom colors, and themes apply to hooks during preview and editing.
+- Remove the added toolbar control and restore the creation menu when the plugin unloads.
+- Respect read-only canvases in both new creation controls.
+
 ## 0.1.1
 
 Initial public release.

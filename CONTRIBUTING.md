@@ -31,6 +31,8 @@ Reload the plugin in Obsidian after rebuilding. Use a test vault rather than per
 
 The script refuses to run outside a vault named `Canvas Card Hook Dev`. It creates its own QA Canvas and removes that file when finished. Close the debugging instance after testing; normal plugin usage does not need debugging enabled.
 
+Run `scripts/creation-integration.cjs` against the same isolated profile to check native color backgrounds, the compact jump button, the blank-canvas creation menu, and the bottom toolbar. It exercises real pointer dragging and keyboard activation, plus read-only guards and cleanup. It creates and removes its own QA Canvas and writes `CREATION-TEST-RESULTS.json`.
+
 ## Compatibility
 
 Canvas node rendering and viewport APIs are internal. Keep wrappers scoped to Canvas and node instances, restore them on unload, and preserve the native clipboard payload. Prefer public Obsidian APIs wherever they provide the required behavior.

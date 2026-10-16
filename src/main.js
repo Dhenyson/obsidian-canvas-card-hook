@@ -1,6 +1,6 @@
 "use strict";
 
-const { Plugin: ObsidianPlugin, Notice, TFile, setIcon } = require("obsidian");
+const { Plugin: ObsidianPlugin, Notice, TFile, setIcon, setTooltip } = require("obsidian");
 const { MIME, makeLink, parseTarget, readHook, writeHook, clipboardLink } = require("./core");
 const EDIT_SIZE = { width: 380, height: 260 };
 
@@ -86,6 +86,16 @@ module.exports = class CanvasCardHook extends ObsidianPlugin {
       plugin.attachNode(node);
       return result;
     }, cleanup);
+    // Extend the native creation menu without replacing its existing actions.
+    this.wrap(canvas, "showCreationMenu", original => function(menu, pos) {
+      const result = original.apply(this, arguments);
+      if (!this.readonly) {
+        const destination = { x: pos.x, y: pos.y };
+        menu.addItem(item => item.setSection("create").setTitle("Add hook").setIcon("link").onClick(() => plugin.addHookAt(this, destination)));
+      }
+      return result;
+    }, cleanup);
+    this.attachToolbar(canvas, cleanup);
     // Append a reference AFTER the native handler writes its duplication payload.
     this.wrap(canvas, "handleCopy", original => function(event) {
       const result = original.apply(this, arguments);
@@ -110,6 +120,25 @@ module.exports = class CanvasCardHook extends ObsidianPlugin {
     };
     doc.addEventListener("pointerdown", outside, true);
     cleanup.push(() => doc.removeEventListener("pointerdown", outside, true));
+  }
+
+  attachToolbar(canvas, cleanup) {
+    if (!canvas.cardMenuEl) return;
+    const button = canvas.cardMenuEl.createDiv({ cls: "canvas-card-menu-button mod-draggable cch-add-hook", attr: { role: "button", tabindex: "0" } });
+    setIcon(button, "link");
+    setTooltip(button, "Drag to add hook", { placement: "top" });
+    const addAtCenter = () => this.addHookAt(canvas, canvas.posCenter(), "center");
+    button.addEventListener("click", () => { if (!canvas.readonly) addAtCenter(); });
+    button.addEventListener("pointerdown", event => {
+      if (canvas.readonly || typeof canvas.dragTempNode !== "function") return;
+      canvas.dragTempNode(event, { ...EDIT_SIZE }, pos => this.addHookAt(canvas, pos));
+    });
+    button.addEventListener("keydown", event => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault(); event.stopPropagation();
+      if (!canvas.readonly) addAtCenter();
+    });
+    cleanup.push(() => button.remove());
   }
 
   attachNode(node) {
@@ -166,7 +195,8 @@ module.exports = class CanvasCardHook extends ObsidianPlugin {
     }
     if (!record.root) {
       const root = node.containerEl.ownerDocument.createElement("div");
-      root.className = "cch-root";
+      // Reuse the native content class so colors and themes paint the same background.
+      root.className = "canvas-node-content cch-root";
       record.root = root;
       node.containerEl.appendChild(root);
       root.addEventListener("dblclick", event => {
@@ -283,12 +313,16 @@ module.exports = class CanvasCardHook extends ObsidianPlugin {
   }
 
   addHook(source) {
-    const canvas = source.canvas;
+    return this.addHookAt(source.canvas, { x: source.x + source.width + 80, y: source.y });
+  }
+
+  addHookAt(canvas, pos, position) {
     if (canvas.readonly || typeof canvas.createTextNode !== "function") return;
-    const node = canvas.createTextNode({ pos: { x: source.x + source.width + 80, y: source.y }, size: { ...EDIT_SIZE }, text: writeHook({ title: "", target: "" }), focus: false });
+    const node = canvas.createTextNode({ pos, position, size: { ...EDIT_SIZE }, text: writeHook({ title: "", target: "" }), focus: false });
     this.attachNode(node); node.render();
     canvas.selectOnly(node); canvas.panIntoView(node.getBBox());
     canvas.requestSave(); this.edit(this.records.get(node));
+    return node;
   }
 
   async follow(value, source) {
