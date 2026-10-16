@@ -20,7 +20,7 @@ Canvas Card Hook adds small, clickable navigation cards to Obsidian Canvas. Link
 
 ## Installation
 
-Once available in the official community directory:
+Find the plugin in the [official Obsidian Community directory](https://community.obsidian.md/plugins/canvas-card-hook), or install it from the app:
 
 1. Open **Settings → Community plugins → Browse**.
 2. Search for **Canvas Card Hook**.
