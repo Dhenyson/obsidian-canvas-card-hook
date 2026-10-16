@@ -1,0 +1,46 @@
+{
+  "name": "canvas-card-hook",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Canvas card linker for Obsidian: hook shortcuts, card links, and native zoom navigation across canvases.",
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "lint": "eslint src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "eslint": "^10.12.0",
+    "eslint-plugin-obsidianmd": "^0.4.2",
+    "globals": "^17.13.0",
+    "obsidian": "^1.14.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dhenyson/obsidian-canvas-card-hook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dhenyson/obsidian-canvas-card-hook/issues"
+  },
+  "homepage": "https://github.com/Dhenyson/obsidian-canvas-card-hook#readme",
+  "keywords": [
+    "obsidian",
+    "obsidian-plugin",
+    "canvas",
+    "canvas-linker",
+    "canvas-links",
+    "card-link",
+    "hook",
+    "jump",
+    "navigation",
+    "zoom-to-selection"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "packageManager": "pnpm@11.25.0"
+}

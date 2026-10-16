@@ -1,0 +1,10 @@
+research/
+dist/
+node_modules/
+*.log
+.dev-profile/
+*.lnk
+*.zip
+/main.js
+artifacts/
+.documentation-profile/

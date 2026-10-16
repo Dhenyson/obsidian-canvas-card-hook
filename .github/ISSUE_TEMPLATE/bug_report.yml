@@ -1,0 +1,22 @@
+name: Bug report
+description: Report a reproducible problem with Canvas Card Hook.
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Describe the steps, expected result, and actual result. Include a minimal example without personal notes if possible.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions and operating system
+      placeholder: Obsidian version, Canvas Card Hook version, OS
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Other Canvas plugins and theme
+      description: Does the issue occur in a clean test vault with the default theme?

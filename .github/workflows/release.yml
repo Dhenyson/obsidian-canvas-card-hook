@@ -1,0 +1,30 @@
+name: Publish plugin release
+on:
+  push:
+    tags: ['[0-9]+.[0-9]+.[0-9]+']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@11.25.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm build
+      - name: Verify release version
+        run: node -e "if (require('./manifest.json').version !== process.env.RELEASE_TAG) process.exit(1)"
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+      - name: Create release with Obsidian installation assets
+        run: gh release create "$RELEASE_TAG" main.js manifest.json styles.css --verify-tag --title "Canvas Card Hook $RELEASE_TAG" --notes-file RELEASE-NOTES.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
