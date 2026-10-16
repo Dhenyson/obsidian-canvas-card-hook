@@ -4,13 +4,13 @@
 
 Canvas Card Hook adds small, clickable navigation cards to Obsidian Canvas. Link to a destination in the same Canvas or another Canvas in your vault. Click the arrow and Obsidian uses its native **Zoom to selection** to focus the destination.
 
-![Canvas Card Hook: card links and jump shortcuts](docs/images/workspace-overview.jpg)
+![Canvas Card Hook: card links and jump shortcuts](docs/images/0.2.0/overview.jpg)
 
 Watch a hook jump to a distant card in the same Canvas, then open a specific card in another Canvas in the same vault. The animated pointer and click highlights make each action visible.
 
-![Animated demonstration: click a hook to jump within a Canvas or between canvases in the same vault](docs/images/demo.gif)
+![Animated demonstration: click a hook to jump within a Canvas or between canvases in the same vault](docs/images/0.2.0/demo.gif)
 
-The screenshots and animation use a fictional example workspace with groups, connections, and three hook shortcuts.
+The screenshots and animation show version 0.2.0 in a fictional example workspace with groups, connections, and three hook shortcuts. They include the compact jump buttons, native card backgrounds, and the hook control in the bottom toolbar.
 
 ## Features
 
@@ -58,7 +58,7 @@ Copy the destination card link from **Canvas B**, then paste it into a hook in *
 
 For cross-canvas links, use **Copy card link** or **Ctrl+C**, rather than a bare card ID. A raw 16-character card ID is resolved only within the hook's own Canvas. Cross-vault navigation is not supported.
 
-![Design workspace in another Canvas in the same vault](docs/images/another-canvas.jpg)
+![Design workspace in another Canvas in the same vault](docs/images/0.2.0/another-canvas.jpg)
 
 ## Compact cards and comfortable editing
 
@@ -68,7 +68,7 @@ Hooks use the native Canvas content background, so standard and custom card colo
 
 While editing, the card temporarily becomes **380 × 260**, the same size as a new hook. Done, Enter, Escape, or clicking outside restores its exact previous width and height. Saves, clipboard data, and history retain the chosen preview dimensions while the editor is expanded.
 
-![Inline hook editor](docs/images/hook-editor.jpg)
+![Inline hook editor](docs/images/0.2.0/editor.jpg)
 
 ## Copy and paste behavior
 
