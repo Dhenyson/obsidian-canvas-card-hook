@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.3
+
+- Match the jump button to the card's chosen Canvas color, including hover.
+- Match the arrow to the card body, including its color tint in light and dark themes.
+- Use native card text font, size, weight, and line height for hook titles.
+- Refresh the documentation screenshots and real-click navigation animation.
+- Extend real-app appearance checks to cover button colors and native typography.
+
 ## 0.2.2
 
 - Include the tested CSS selector correction omitted from the 0.2.1 package. No visual or functional changes are intended.

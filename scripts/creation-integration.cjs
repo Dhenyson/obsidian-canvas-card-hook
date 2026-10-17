@@ -42,6 +42,11 @@ const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
       await new Promise(resolve => setTimeout(resolve, 150));
       const root = hook.containerEl.querySelector('.cch-root');
       const button = root.querySelector('.cch-jump');
+      c.deselectAll();
+      const colorSwatch = document.createElement('div');
+      colorSwatch.className = 'canvas-color-picker-item';
+      colorSwatch.hidden = true;
+      hook.nodeEl.append(colorSwatch);
       const buttonSize = { width: getComputedStyle(button).width, height: getComputedStyle(button).height, icon: getComputedStyle(button.querySelector('svg')).width };
       const backgrounds = [];
       const originalTheme = [...document.body.classList].filter(s => s === 'theme-dark' || s === 'theme-light');
@@ -50,10 +55,12 @@ const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
           document.body.classList.remove('theme-dark', 'theme-light'); document.body.classList.add(theme);
           for (const color of ['', '1', '2', '3', '4', '5', '6', '#b57bd8']) {
             native.setColor(color); hook.setColor(color); native.render(); hook.render();
-            backgrounds.push({ theme, color, native: getComputedStyle(native.contentEl).backgroundColor, hook: getComputedStyle(root).backgroundColor });
+            backgrounds.push({ theme, color, native: getComputedStyle(native.contentEl).backgroundColor, hook: getComputedStyle(root).backgroundColor,
+              chosenColor: getComputedStyle(colorSwatch).backgroundColor, button: getComputedStyle(button).backgroundColor });
           }
         }
       } finally {
+        colorSwatch.remove();
         document.body.classList.remove('theme-dark', 'theme-light'); document.body.classList.add(...originalTheme);
         native.setColor(''); hook.setColor(''); native.render(); hook.render();
       }
@@ -70,10 +77,22 @@ const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
         visibility.push({ zoom, rootVisible: getComputedStyle(root).display !== 'none', nativeHidden: nativeLayers.every(el => getComputedStyle(el).display === 'none') });
       }
       c.setState({ x: 360, y: 100, zoom: 0 });
-      return { buttonSize, backgrounds, editingBackground, visibility, toolbar: c.cardMenuEl.querySelectorAll('.cch-add-hook').length };
+      native.attach(); native.render(); hook.attach(); hook.render();
+      await new Promise(resolve => setTimeout(resolve, 100));
+      const nativeText = native.contentEl.querySelector('.markdown-preview-view');
+      const title = root.querySelector('.cch-title');
+      const typography = element => {
+        const style = getComputedStyle(element);
+        return Object.fromEntries(['fontFamily', 'fontSize', 'fontWeight', 'lineHeight'].map(key => [key, style[key]]));
+      };
+      return { buttonSize, backgrounds, editingBackground, visibility,
+        typography: { native: typography(nativeText), hook: typography(title) },
+        toolbar: c.cardMenuEl.querySelectorAll('.cch-add-hook').length };
     });
     check(appearance.buttonSize.width === '28px' && appearance.buttonSize.height === '28px' && appearance.buttonSize.icon === '16px', 'Compact jump button uses a 28px circle and a 16px icon');
     for (const row of appearance.backgrounds) check(!!row.native && row.native === row.hook, `Hook background matches a native card: ${row.theme}, ${row.color || 'default'}`);
+    for (const row of appearance.backgrounds) check(row.button === row.chosenColor, `Jump button matches the native card color picker: ${row.theme}, ${row.color || 'default'}`);
+    for (const key of ['fontFamily', 'fontSize', 'fontWeight', 'lineHeight']) check(appearance.typography.hook[key] === appearance.typography.native[key], `Hook text matches native card ${key}: ${appearance.typography.hook[key]} / ${appearance.typography.native[key]}`);
     check(appearance.editingBackground.native === appearance.editingBackground.hook, 'Editing retains the native colored background');
     for (const row of appearance.visibility) check(row.rootVisible && row.nativeHidden, `Hook stays visible without native content overlap at zoom ${row.zoom}, without CSS important overrides`);
     check(appearance.toolbar === 1, 'Exactly one hook control is added to the native toolbar');

@@ -4,13 +4,13 @@
 
 Canvas Card Hook adds small, clickable navigation cards to Obsidian Canvas. Link to a destination in the same Canvas or another Canvas in your vault. Click the arrow and Obsidian uses its native **Zoom to selection** to focus the destination.
 
-![Canvas Card Hook: card links and jump shortcuts](docs/images/0.2.0/overview.jpg)
+![Canvas Card Hook: card links and jump shortcuts](docs/images/0.2.3/overview.jpg)
 
 Watch a hook jump to a distant card in the same Canvas, then open a specific card in another Canvas in the same vault. The animated pointer and click highlights make each action visible.
 
-![Animated demonstration: click a hook to jump within a Canvas or between canvases in the same vault](docs/images/0.2.0/demo.gif)
+![Animated demonstration: click a hook to jump within a Canvas or between canvases in the same vault](docs/images/0.2.3/demo.gif)
 
-The screenshots and animation show version 0.2.0 in a fictional example workspace with groups, connections, and three hook shortcuts. They include the compact jump buttons, native card backgrounds, and the hook control in the bottom toolbar.
+The screenshots and animation show version 0.2.3 in a fictional example workspace with groups, connections, and three hook shortcuts. They include buttons that match card colors, arrows that match the card body, native text styling, and the hook control in the bottom toolbar.
 
 ## Features
 
@@ -58,17 +58,17 @@ Copy the destination card link from **Canvas B**, then paste it into a hook in *
 
 For cross-canvas links, use **Copy card link** or **Ctrl+C**, rather than a bare card ID. A raw 16-character card ID is resolved only within the hook's own Canvas. Cross-vault navigation is not supported.
 
-![Design workspace in another Canvas in the same vault](docs/images/0.2.0/another-canvas.jpg)
+![Design workspace in another Canvas in the same vault](docs/images/0.2.3/another-canvas.jpg)
 
 ## Compact cards and comfortable editing
 
 Resize a hook to suit your layout. Its arrow stays centered even on short cards.
 
-Hooks use the native Canvas content background, so standard and custom card colors apply just as they do to regular cards, including while editing. The jump button is a compact 28-pixel circle with a 16-pixel arrow.
+Hooks use the native Canvas content background, so standard and custom card colors apply just as they do to regular cards, including while editing. Hook titles use the same font, size, normal weight, and line height as native card text. The jump button is a compact 28-pixel circle with a 16-pixel arrow: the circle follows the chosen card color, while the arrow matches the card body, including its tint in light and dark themes.
 
 While editing, the card temporarily becomes **380 × 260**, the same size as a new hook. Done, Enter, Escape, or clicking outside restores its exact previous width and height. Saves, clipboard data, and history retain the chosen preview dimensions while the editor is expanded.
 
-![Inline hook editor](docs/images/0.2.0/editor.jpg)
+![Inline hook editor](docs/images/0.2.3/editor.jpg)
 
 ## Copy and paste behavior
 
@@ -116,7 +116,7 @@ pnpm build
 
 The build produces `main.js` in the repository root and installable runtime files in `dist/canvas-card-hook/`. A Git tag matching the manifest version publishes the three installation assets through GitHub Actions after validation.
 
-The local test suite contains seven unit tests and 76 integration checks in the real Obsidian app. See [TEST-RESULTS.json](TEST-RESULTS.json) and [CREATION-TEST-RESULTS.json](CREATION-TEST-RESULTS.json) for the tested behaviors. The creation checks cover native color matching in light and dark themes, the compact button, menu placement, toolbar clicks, keyboard activation, actual pointer dragging, read-only behavior, and unload/reload cleanup. They also verify visibility at several zoom levels without CSS important overrides. These checks are evidence of the tested release, not a promise that all themes or Canvas plugins are compatible.
+The local test suite contains seven unit tests and 96 integration checks in the real Obsidian app. See [TEST-RESULTS.json](TEST-RESULTS.json) and [CREATION-TEST-RESULTS.json](CREATION-TEST-RESULTS.json) for the tested behaviors. The creation checks cover native color matching in light and dark themes, the compact button, menu placement, toolbar clicks, keyboard activation, actual pointer dragging, read-only behavior, and unload/reload cleanup. They also verify visibility at several zoom levels without CSS important overrides. These checks are evidence of the tested release, not a promise that all themes or Canvas plugins are compatible.
 
 Release workflows generate GitHub build-provenance attestations for all three installation files before publishing. See [Security and review notes](docs/SECURITY-REVIEW.md) for the remaining clipboard and vault access disclosures.
 

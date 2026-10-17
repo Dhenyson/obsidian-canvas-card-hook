@@ -37,6 +37,12 @@ The script refuses to run outside a vault named `Canvas Card Hook Dev`. It creat
 
 Run `scripts/creation-integration.cjs` against the same isolated profile to check native color backgrounds, the compact jump button, the blank-canvas creation menu, and the bottom toolbar. It exercises real pointer dragging and keyboard activation, plus read-only guards and cleanup. It creates and removes its own QA Canvas and writes `CREATION-TEST-RESULTS.json`.
 
+## Documentation captures
+
+With the same disposable vault and desktop debugging endpoint, run `node scripts/capture-docs.cjs images` first, then `node scripts/capture-docs.cjs animation`. These create a fictional project workspace and capture the actual plugin in `docs/images/<manifest-version>/`. The animation moves a visible pointer and sends real mouse clicks to jump to a distant card, return, and navigate to another Canvas. Both commands refuse to run against a vault other than `Canvas Card Hook Dev`.
+
+Run `python scripts/encode-docs.py` with Pillow installed to encode the captured animation frames as a looping GIF. Frames and their timing are kept in ignored `artifacts/documentation-frames/`; no personal vault content is included. Playwright is supplied through `PLAYWRIGHT_PATH`, as for the integration scripts.
+
 ## Compatibility
 
 Canvas node rendering and viewport APIs are internal. Keep wrappers scoped to Canvas and node instances, restore them on unload, and preserve the native clipboard payload. Prefer public Obsidian APIs wherever they provide the required behavior.

@@ -1,5 +1,5 @@
 {
-  "passed": 34,
+  "passed": 54,
   "checks": [
     "Compact jump button uses a 28px circle and a 16px icon",
     "Hook background matches a native card: theme-dark, default",
@@ -18,6 +18,26 @@
     "Hook background matches a native card: theme-light, 5",
     "Hook background matches a native card: theme-light, 6",
     "Hook background matches a native card: theme-light, #b57bd8",
+    "Jump button matches the native card color picker: theme-dark, default",
+    "Jump button matches the native card color picker: theme-dark, 1",
+    "Jump button matches the native card color picker: theme-dark, 2",
+    "Jump button matches the native card color picker: theme-dark, 3",
+    "Jump button matches the native card color picker: theme-dark, 4",
+    "Jump button matches the native card color picker: theme-dark, 5",
+    "Jump button matches the native card color picker: theme-dark, 6",
+    "Jump button matches the native card color picker: theme-dark, #b57bd8",
+    "Jump button matches the native card color picker: theme-light, default",
+    "Jump button matches the native card color picker: theme-light, 1",
+    "Jump button matches the native card color picker: theme-light, 2",
+    "Jump button matches the native card color picker: theme-light, 3",
+    "Jump button matches the native card color picker: theme-light, 4",
+    "Jump button matches the native card color picker: theme-light, 5",
+    "Jump button matches the native card color picker: theme-light, 6",
+    "Jump button matches the native card color picker: theme-light, #b57bd8",
+    "Hook text matches native card fontFamily: \"??\", \"??\", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, \"Segoe UI\", \"Google Sans Flex\", Roboto, \"Inter Variable\", Inter, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif / \"??\", \"??\", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, \"Segoe UI\", \"Google Sans Flex\", Roboto, \"Inter Variable\", Inter, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif",
+    "Hook text matches native card fontSize: 16px / 16px",
+    "Hook text matches native card fontWeight: 400 / 400",
+    "Hook text matches native card lineHeight: 24px / 24px",
     "Editing retains the native colored background",
     "Hook stays visible without native content overlap at zoom -2, without CSS important overrides",
     "Hook stays visible without native content overlap at zoom 0, without CSS important overrides",
@@ -36,5 +56,5 @@
     "Unloading restores the original native creation menu",
     "Reloading restores exactly one hook toolbar control"
   ],
-  "date": "2026-10-16T19:44:58.208Z"
+  "date": "2026-10-17T16:36:53.533Z"
 }

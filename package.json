@@ -1,6 +1,6 @@
 {
   "name": "canvas-card-hook",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "description": "Canvas card linker for Obsidian: hook shortcuts, card links, and native zoom navigation across canvases.",
   "scripts": {

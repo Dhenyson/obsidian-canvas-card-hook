@@ -1,7 +1,7 @@
 {
   "id": "canvas-card-hook",
   "name": "Canvas Card Hook",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "minAppVersion": "1.14.4",
   "description": "Link Canvas cards with a lightweight card linker. Create hook shortcuts, copy card links, and jump to cards across canvases in the same vault using native zoom to selection.",
   "author": "Dhenyson",
